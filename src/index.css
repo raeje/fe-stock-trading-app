@@ -1,13 +1,93 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .animation-delay-1000 {
+    transition-delay: 1000ms;
+  }
+  .animation-delay-2000 {
+    transition-delay: 2000ms;
+  }
+  .animation-delay-3000 {
+    transition-delay: 3000ms;
+  }
+  .animation-delay-4000 {
+    transition-delay: 4000ms;
+  }
+  .animation-delay-10000 {
+    transition-delay: 10000ms;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.bg-gray {
+  background-image: linear-gradient(
+    to right bottom,
+    #576f72,
+    #5e777a,
+    #658082,
+    #6c8889,
+    #739191,
+    #769d9c,
+    #79a8a7,
+    #7bb4b2,
+    #77c5c2,
+    #72d7d2,
+    #6ae9e2,
+    #5ffbf1
+  );
+}
+
+.bg-ice {
+  background-image: linear-gradient(
+    to right bottom,
+    #569daa,
+    #5ca6ae,
+    #64afb1,
+    #6db7b4,
+    #78c0b6,
+    #7bc8bb,
+    #7ecfc0,
+    #81d7c5,
+    #7be0cf,
+    #74e9da,
+    #6bf2e5,
+    #5ffbf1
+  );
+}
+
+.bg-forest {
+  background-image: linear-gradient(
+    to right bottom,
+    #61876e,
+    #6d9174,
+    #799b7a,
+    #86a47f,
+    #93ae85,
+    #97b88c,
+    #9bc194,
+    #9ecb9c,
+    #94d7ac,
+    #87e4c0,
+    #75f0d7,
+    #5ffbf1
+  );
+}
+
+.bg-sunrise {
+  background-image: linear-gradient(
+    to right bottom,
+    #f07b3f,
+    #f58c41,
+    #f89d44,
+    #fbae4a,
+    #fdbe52,
+    #f0cd5c,
+    #e2db6b,
+    #d5e87f,
+    #baf2a0,
+    #a6f9c2,
+    #9efde2,
+    #a6fffa
+  );
 }
