@@ -3,8 +3,6 @@ import ContentTemplate from "../components/ContentTemplate";
 import { getPortfolio, getMyInfo } from "../helpers/api_helper";
 import { Pie } from "../components/charts";
 
-const TH_CLASS = "uppercase font-semibold text-sm";
-
 const ContainerGroup1 = ({ children }) => {
   return (
     <div className="min-h-80 w-full grid grid-cols-1 gap-8">
@@ -19,7 +17,7 @@ const ContainerGroup3 = ({ children }) => {
   const childrenArray = Children.toArray(children);
   const card = (child) => {
     return (
-      <div className="bg-custom-white shadow rounded-lg p-4 sm:p-6 xl:p-8  2xl:col-span-2">
+      <div className="bg-custom-white shadow rounded-lg p-4 sm:p-6 xl:p-8 2xl:col-span-2">
         <div className="flex items-center justify-between mb-4">{child}</div>
       </div>
     );
@@ -123,8 +121,8 @@ const Portfolio = () => {
 
   const fundDistributionData = [
     {
-      id: "User Balance",
-      label: "USD",
+      id: "Unallocated",
+      label: "Unallocated",
       value: user.balance,
     },
     ...stockValueDistributionData,
@@ -134,7 +132,7 @@ const Portfolio = () => {
     <ContentTemplate title="Portfolio">
       <ContainerGroup3>
         <div className="min-h-80 w-full">
-          <h2 className="text-white">Fund Distribution</h2>
+          <h2 className="text-white">Fund Allocation</h2>
           <Pie data={fundDistributionData} colorScheme="set3" />
         </div>
         <div className="min-h-80 w-full">
@@ -149,7 +147,7 @@ const Portfolio = () => {
 
       <ContainerGroup1>
         <div className="min-h-80 w-full flex flex-col">
-          <h2 className="text-white">Stocks</h2>
+          <h2 className="text-white">Stock Assets</h2>
           <PortfolioTable data={portfolio} />
         </div>
       </ContainerGroup1>

@@ -2,7 +2,7 @@ import axios from "axios";
 
 const STOCK_URL = process.env.REACT_APP_STOCK_URL;
 const Authorization =
-  "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2ODE3NDM4MTF9.Mw7m0JoulT6R0G1p1Bfvc3Fh8wnXfPDydE6rY8GoKsk";
+  "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2ODE4ODA4MDV9.n3MYlAusEavBfnU5TvIYA6lOgKwSiGnCJkjxHrP1O1s";
 
 // ============================================================================
 // Portfolio
@@ -21,9 +21,9 @@ const getPortfolio = async () => {
 };
 
 // ============================================================================
-// Stock
+// Stocks
 // ============================================================================
-const getStock = async ({ id }) => {
+const getStocks = async () => {
   return await axios
     .get(`${STOCK_URL}/stocks/`, {
       headers: { Authorization },
@@ -36,8 +36,21 @@ const getStock = async ({ id }) => {
     });
 };
 
+const getStock = async ({ id }) => {
+  return await axios
+    .get(`${STOCK_URL}/stocks/${id}}`, {
+      headers: { Authorization },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((errors) => {
+      return errors.response.data;
+    });
+};
+
 // ============================================================================
-// Stock
+// Users
 // ============================================================================
 const getUser = async ({ id }) => {
   return await axios
@@ -65,4 +78,23 @@ const getMyInfo = async () => {
     });
 };
 
-export { getPortfolio, getStock, getUser, getMyInfo };
+// ============================================================================
+// Orders
+// ============================================================================
+const createOrder = async ({ category, price, quantity, stocks_id }) => {
+  return await axios
+    .post(
+      `${STOCK_URL}/orders/new`,
+      { category, price, quantity, stocks_id },
+      {
+        headers: { Authorization },
+      }
+    )
+    .then((response) => {
+      return response.data;
+    })
+    .catch((errors) => {
+      return errors.response.data;
+    });
+};
+export { getPortfolio, getStocks, getStock, getUser, getMyInfo, createOrder };

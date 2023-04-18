@@ -3,7 +3,7 @@ import Dashboard from "./pages/Dashboard";
 import Topbar from "./components/Topbar";
 import Sidebar from "./components/Sidebar";
 import ContentTemplate from "./components/ContentTemplate";
-import { Market, Portfolio } from "./pages";
+import { Market, Portfolio, Orders } from "./pages";
 import { BrowserRouter } from "react-router-dom";
 import {
   createBrowserRouter,
@@ -27,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/portfolio",
         element: <Portfolio />,
+      },
+      {
+        path: "/dashboard/orders",
+        element: <Orders />,
       },
     ],
   },
