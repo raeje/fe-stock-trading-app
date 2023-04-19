@@ -2,7 +2,7 @@ import axios from "axios";
 
 const STOCK_URL = process.env.REACT_APP_STOCK_URL;
 const Authorization =
-  "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2ODE4ODA4MDV9.n3MYlAusEavBfnU5TvIYA6lOgKwSiGnCJkjxHrP1O1s";
+  "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2ODE5NjUzNjF9.iiRI1sh78GYTlUn9uPWuPY9jYQ8nml0fVhIpTNhpEoI";
 
 // ============================================================================
 // Portfolio
@@ -65,6 +65,19 @@ const getUser = async ({ id }) => {
     });
 };
 
+const getMyOrders = async () => {
+  return await axios
+    .get(`${STOCK_URL}/users/orders`, {
+      headers: { Authorization },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((errors) => {
+      return errors.response.data;
+    });
+};
+
 const getMyInfo = async () => {
   return await axios
     .get(`${STOCK_URL}/users/me`, {
@@ -97,4 +110,12 @@ const createOrder = async ({ category, price, quantity, stocks_id }) => {
       return errors.response.data;
     });
 };
-export { getPortfolio, getStocks, getStock, getUser, getMyInfo, createOrder };
+export {
+  getPortfolio,
+  getStocks,
+  getStock,
+  getUser,
+  getMyOrders,
+  getMyInfo,
+  createOrder,
+};

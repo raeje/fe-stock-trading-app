@@ -7,9 +7,8 @@ const TitleContainer = ({ title, info }) => {
       <span className="text-2xl sm:text-3xl leading-none font-bold text-white">
         {title}
       </span>
-      <span className="text-2xl sm:text-3xl leading-none font-bold text-white">
-        {title.toUpperCase() === "ORDERS" ? "Balance: " : ""}
-        {info ? `$ ${info}` : ""}
+      <span className="text-2xl sm:text-3xl leading-none font-bold text-white tracking-wide">
+        {info ? `Balance: $ ${info}` : ""}
       </span>
     </div>
   );

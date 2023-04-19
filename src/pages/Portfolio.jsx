@@ -17,7 +17,7 @@ const ContainerGroup3 = ({ children }) => {
   const childrenArray = Children.toArray(children);
   const card = (child) => {
     return (
-      <div className="bg-custom-white shadow rounded-lg p-4 sm:p-6 xl:p-8 2xl:col-span-2">
+      <div className="bg-custom-white shadow border-2 border-gray-500 rounded-lg p-4 sm:p-6 xl:p-8 2xl:col-span-2">
         <div className="flex items-center justify-between mb-4">{child}</div>
       </div>
     );
@@ -30,8 +30,6 @@ const ContainerGroup3 = ({ children }) => {
 };
 
 const PortfolioTable = ({ data }) => {
-  // console.log(data);
-
   const tableRow = (entry) => {
     return (
       <tr className="odd:bg-white even:bg-blue-50" key={entry.ticker}>
@@ -70,7 +68,7 @@ const PortfolioTable = ({ data }) => {
                 Price
               </th>
               <th className="min-w-40 text-center py-3 px-4 uppercase font-semibold text-sm">
-                Total Price
+                Est. Total Price
               </th>
               <th className="text-center py-3 px-4 uppercase font-semibold text-sm">
                 Actions
@@ -99,7 +97,6 @@ const Portfolio = () => {
 
       const userData = await getMyInfo();
       setUser(userData.data);
-      console.log("me", userData.data.balance);
     })();
   }, []);
 
@@ -129,7 +126,10 @@ const Portfolio = () => {
   ];
 
   return (
-    <ContentTemplate title="Portfolio">
+    <ContentTemplate
+      title="Portfolio"
+      info={parseFloat(user.balance).toLocaleString("en-US")}
+    >
       <ContainerGroup3>
         <div className="min-h-80 w-full">
           <h2 className="text-white">Fund Allocation</h2>

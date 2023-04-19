@@ -22,7 +22,7 @@ const ContainerGroup2 = ({ children }) => {
     );
   };
   return (
-    <div className="h-80 w-full grid grid-cols-2 gap-8">
+    <div className="min-h-80 w-full grid grid-cols-2 gap-8 mb-8">
       {childrenArray.map((child, index) => card(child, index))}
     </div>
   );
