@@ -1,4 +1,5 @@
 import React from "react";
+import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Topbar from "./components/Topbar";
 import Sidebar from "./components/Sidebar";
@@ -14,7 +15,7 @@ import {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Dashboard />,
+    element: <Home />,
   },
   {
     path: "/dashboard",

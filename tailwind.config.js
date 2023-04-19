@@ -9,6 +9,12 @@ module.exports = {
         "custom-white": "#2C394B",
         "custom-gray": "#222831",
         "custom-highlight": "#C84B31",
+        "custom-cyan": "#29fcd2",
+        "custom-yellow": "#fbf407",
+        "custom-red": "#fb2431",
+      },
+      fontFamily: {
+        sans: ["Montserrat", "sans-serif"],
       },
       animation: {
         blob: "blob 36s infinite",
@@ -32,6 +38,9 @@ module.exports = {
       width: {
         128: "32rem",
       },
+    },
+    fontFamily: {
+      sans: ["Montserrat", "sans-serif"],
     },
   },
   plugins: [],
