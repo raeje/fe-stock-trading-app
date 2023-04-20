@@ -4,7 +4,15 @@ import Dashboard from "./pages/Dashboard";
 import Topbar from "./components/Topbar";
 import Sidebar from "./components/Sidebar";
 import ContentTemplate from "./components/ContentTemplate";
-import { Market, Portfolio, Orders, Transactions, Signup } from "./pages";
+import {
+  Market,
+  Portfolio,
+  Orders,
+  Transactions,
+  Signup,
+  Login,
+} from "./pages";
+import { CreateUser } from "./pages/admin";
 import { BrowserRouter } from "react-router-dom";
 import {
   createBrowserRouter,
@@ -20,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
   {
     path: "/dashboard",
@@ -38,8 +50,12 @@ const router = createBrowserRouter([
         element: <Orders />,
       },
       {
-        path: "/dashboard/Transactions",
+        path: "/dashboard/transactions",
         element: <Transactions />,
+      },
+      {
+        path: "/dashboard/create-user",
+        element: <CreateUser />,
       },
     ],
   },

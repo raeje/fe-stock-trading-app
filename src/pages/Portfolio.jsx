@@ -15,16 +15,19 @@ const ContainerGroup1 = ({ children }) => {
 
 const ContainerGroup3 = ({ children }) => {
   const childrenArray = Children.toArray(children);
-  const card = (child) => {
+  const card = ({ child, index }) => {
     return (
-      <div className="bg-custom-white shadow border-2 border-gray-500 rounded-lg p-4 sm:p-6 xl:p-8 2xl:col-span-2">
+      <div
+        className="bg-custom-white shadow border-2 border-gray-500 rounded-lg p-4 sm:p-6 xl:p-8 2xl:col-span-2"
+        key={`portfolio-child-${index}`}
+      >
         <div className="flex items-center justify-between mb-4">{child}</div>
       </div>
     );
   };
   return (
     <div className="min-h-80 w-full grid grid-cols-3 gap-8">
-      {childrenArray.map((child) => card(child))}
+      {childrenArray.map((child, index) => card({ child, index }))}
     </div>
   );
 };

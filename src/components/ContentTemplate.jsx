@@ -4,10 +4,10 @@ const TitleContainer = ({ title, info }) => {
   return (
     //<div className="bg-custom-white border-yellow-500 border-2 shadow rounded-lg p-4 sm:p-6 xl:p-8  2xl:col-span-2 flex place-content-between w-full px-8">
     <div className="flex place-content-between w-full px-4">
-      <span className="text-2xl sm:text-3xl leading-none font-bold text-white">
+      <span className="text-2xl sm:text-3xl leading-none font-bold text-black">
         {title}
       </span>
-      <span className="text-2xl sm:text-3xl leading-none font-bold text-white tracking-wide">
+      <span className="text-2xl sm:text-3xl leading-none font-bold text-black tracking-wide">
         {info ? `Balance: $ ${info}` : ""}
       </span>
     </div>
@@ -18,7 +18,7 @@ const ContentTemplate = ({ title, info, children }) => {
   return (
     <div
       id="main-content"
-      className="bg-custom-dark h-full w-full min-h-screen relative overflow-y-auto lg:ml-64"
+      className="bg-custom-yellow h-full w-full min-h-screen relative overflow-y-auto lg:ml-64"
     >
       <main>
         <div className="pt-10 px-8">

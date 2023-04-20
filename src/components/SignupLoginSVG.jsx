@@ -2,7 +2,7 @@ import React from "react";
 
 const SignupLoginSVG = () => {
   return (
-    <div className="hidden md:block w-1/2 bg-black py-10 px-10">
+    <div className="hidden md:block w-1/2 bg-custom-cyan py-10 px-10">
       <svg
         id="a87032b8-5b37-4b7e-a4d9-4dbfbe394641"
         data-name="Layer 1"
@@ -30,7 +30,7 @@ const SignupLoginSVG = () => {
           data-name="Path 22"
           d="M747.327,253.4445h-4.092v-112.1a64.883,64.883,0,0,0-64.883-64.883H440.845a64.883,64.883,0,0,0-64.883,64.883v615a64.883,64.883,0,0,0,64.883,64.883H678.352a64.883,64.883,0,0,0,64.882-64.883v-423.105h4.092Z"
           transform="translate(-227.576 -76.46149)"
-          fill="#e6e6e6"
+          fill="#000"
         />
         <path
           id="b2715b96-3117-487c-acc0-20904544b5b7"
@@ -157,7 +157,7 @@ const SignupLoginSVG = () => {
         />
         <path
           d="M615.96281,731.51778h23.64387a0,0,0,0,1,0,0v14.88687a0,0,0,0,1,0,0H601.076a0,0,0,0,1,0,0v0A14.88686,14.88686,0,0,1,615.96281,731.51778Z"
-          fill="#29fcd2"
+          fill="#fb2431"
         />
         <polygon
           points="684.66 731.557 672.459 732.759 662.018 686.271 680.025 684.497 684.66 731.557"
@@ -166,7 +166,7 @@ const SignupLoginSVG = () => {
         <path
           d="M891.68576,806.12757h23.64387a0,0,0,0,1,0,0v14.88687a0,0,0,0,1,0,0H876.7989a0,0,0,0,1,0,0v0A14.88686,14.88686,0,0,1,891.68576,806.12757Z"
           transform="translate(-303.00873 15.2906) rotate(-5.62529)"
-          fill="#29fcd2"
+          fill="#fb2431"
         />
         <circle cx="640.3925" cy="384.57375" r="24.56103" fill="#ffb8b8" />
         <path

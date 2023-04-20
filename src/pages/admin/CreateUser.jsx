@@ -1,10 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Branding from "../components/Branding";
-import SignupLoginSVG from "../components/SignupLoginSVG";
-import { signup } from "../helpers/api_helper";
+import React, { useState } from "react";
+import ContentTemplate from "../../components/ContentTemplate";
+import { signup } from "../../helpers/api_helper";
 
-const initSignupForm = {
+const ContainerGroup1 = ({ children }) => {
+  return (
+    <div className="min-h-80 w-full grid grid-cols-1 gap-8 px-8 justify-center">
+      <div className="bg-custom-white shadow rounded-lg p-4 sm:p-6 xl:p-8  2xl:col-span-2">
+        <div className="flex place-items-center justify-between mb-4">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const initNewUserForm = {
   name: "",
   role: "trader",
   email: "",
@@ -12,18 +22,11 @@ const initSignupForm = {
   password_confirmation: "",
 };
 
-const Signup = () => {
-  const [signupForm, setSignupform] = useState(initSignupForm);
+const CreateUser = () => {
+  const [newUser, setNewUser] = useState(initNewUserForm);
 
-  const navigate = useNavigate();
-
-  const handleFormChange = (e) => {
-    const { name, value } = e.target;
-    setSignupform({ ...signupForm, [name]: value });
-  };
-
-  const handleSignup = async () => {
-    const signupAction = await signup(signupForm);
+  const handleCreateNewUser = async () => {
+    const signupAction = await signup(newUser);
 
     if (signupAction.status === 200) {
       console.log("success", signupAction);
@@ -32,23 +35,18 @@ const Signup = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(signupForm);
-  }, [signupForm]);
+  const handleFormChange = (e) => {
+    const { name, value } = e.target;
+    setNewUser({ ...newUser, [name]: value });
+  };
 
   return (
-    <div className="min-w-screen min-h-screen bg-custom-yellow flex items-center justify-center px-5 py-5">
-      <Branding />
-      <div className="text-gray-500 rounded-3xl shadow-xl w-3/4 border-4 border-gray-400 overflow-hidden backdrop-blur-sm z-20">
-        <div className="md:flex w-full">
-          <SignupLoginSVG />
-
-          <div className="w-full md:w-1/2 py-10 px-5 md:px-10 ">
-            <div className="text-center mb-10">
-              <h1 className="font-bold text-3xl text-gray-900">REGISTER</h1>
-              <p>Enter your information to register</p>
-            </div>
-            <div>
+    <ContentTemplate title="Create User">
+      <ContainerGroup1>
+        <div className="min-h-80 w-full flex flex-col">
+          <h2 className="text-white mb-4">New User Form</h2>
+          <div className="w-full py-10 px-5 md:px-10 border-2 border-custom-cyan rounded-xl">
+            <div className="text-white">
               <div className="flex -mx-3">
                 <div className="w-1/2 px-3 mb-5 backdrop-blur-sm">
                   <label htmlFor="" className="text-xs font-semibold px-1">
@@ -90,7 +88,7 @@ const Signup = () => {
                       name="role"
                       value="trader"
                       onChange={handleFormChange}
-                      checked={signupForm.role === "trader"}
+                      checked={newUser.role === "trader"}
                     />
                     <label
                       htmlFor="trader"
@@ -106,7 +104,7 @@ const Signup = () => {
                       name="role"
                       value="admin"
                       onChange={handleFormChange}
-                      checked={signupForm.role === "admin"}
+                      checked={newUser.role === "admin"}
                     />
                     <label
                       htmlFor="admin"
@@ -208,24 +206,18 @@ const Signup = () => {
                 <div className="w-full px-3 mb-3">
                   <button
                     className="block w-full max-w-xs mx-auto bg-custom-red hover:bg-red-700 focus:bg-red-700 text-white rounded-lg px-3 py-3 font-semibold"
-                    onClick={handleSignup}
+                    onClick={handleCreateNewUser}
                   >
-                    REGISTER NOW
+                    CREATE USER
                   </button>
                 </div>
-                <span
-                  className="text-xs mx-auto cursor-pointer"
-                  onClick={() => navigate("/login")}
-                >
-                  Already have an account? Login
-                </span>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </ContainerGroup1>
+    </ContentTemplate>
   );
 };
 
-export default Signup;
+export default CreateUser;

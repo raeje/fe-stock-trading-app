@@ -57,7 +57,7 @@ const OrdersTable = ({ data = [] }) => {
       <div className="shadow overflow-hidden rounded border-b border-gray-200">
         <table className="min-w-full bg-white">
           <thead className="bg-gray-800 text-white">
-            <tr>
+            <tr key="transaction-history-headers">
               <th className="w-1/12 text-center py-3 px-2 uppercase font-semibold text-xs">
                 Category
               </th>

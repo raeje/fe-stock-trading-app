@@ -1,8 +1,10 @@
 import axios from "axios";
+import { getCurrentUser } from "./localStorage_helper";
 
 const STOCK_URL = process.env.REACT_APP_STOCK_URL;
-const Authorization =
-  "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2ODE5NjUzNjF9.iiRI1sh78GYTlUn9uPWuPY9jYQ8nml0fVhIpTNhpEoI";
+//const Authorization =
+//  "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2ODE5NjUzNjF9.iiRI1sh78GYTlUn9uPWuPY9jYQ8nml0fVhIpTNhpEoI";
+const Authorization = getCurrentUser()?.token;
 
 // ============================================================================
 // Authentication
@@ -30,6 +32,19 @@ const signup = async ({
     });
 };
 
+const login = async ({ email, password }) => {
+  return await axios
+    .put(`${STOCK_URL}/login`, {
+      email,
+      password,
+    })
+    .then((response) => {
+      return response;
+    })
+    .catch((errors) => {
+      return errors.response.data;
+    });
+};
 // ============================================================================
 // Portfolio
 // ============================================================================
@@ -138,6 +153,7 @@ const createOrder = async ({ category, price, quantity, stocks_id }) => {
 };
 export {
   signup,
+  login,
   getPortfolio,
   getStocks,
   getStock,

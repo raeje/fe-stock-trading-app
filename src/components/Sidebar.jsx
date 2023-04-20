@@ -6,12 +6,13 @@ import {
   Receipt,
   PointOfSale,
 } from "@mui/icons-material";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
 const Item = ({ path, name, icon }) => {
   const LINK_ACTIVE_CLASS_NAME =
-    "font-bold rounded-lg flex items-center p-2 bg-custom-highlight text-white";
+    "font-bold rounded-lg flex items-center p-2 bg-custom-red text-white";
   const LINK_INACTIVE_CLASS_NAME =
-    "text-white font-normal rounded-lg flex items-center p-2 hover:bg-yellow-500 hover:text-black";
+    "text-white font-normal rounded-lg flex items-center p-2 hover:bg-custom-yellow hover:text-black";
   return (
     <NavLink
       to={{
@@ -27,7 +28,7 @@ const Item = ({ path, name, icon }) => {
   );
 };
 
-const Sidebar = () => {
+const Sidebar = ({ role }) => {
   return (
     <>
       <aside
@@ -36,8 +37,14 @@ const Sidebar = () => {
         aria-label="Sidebar"
       >
         <div className="relative flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-white pt-0">
-          <div className="bg-custom-light flex-1 flex flex-col pt-5 pb-4 box-border overflow-y-auto">
+          <div className="bg-slate-700 flex-1 flex flex-col pt-5 pb-4 box-border overflow-y-auto">
             <div className="flex-1 px-3 space-y-1">
+              <Item path="" name={role} icon={<Storefront />} />
+              <Item
+                path="/dashboard/create-user"
+                name="Create User"
+                icon={<PersonAddIcon />}
+              />
               <Item
                 path="/dashboard/market"
                 name="Market"
