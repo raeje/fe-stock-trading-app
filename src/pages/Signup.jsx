@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import logo from "../stratton-oakmont-logo.svg";
+import { signup } from "../helpers/api_helper";
 
 const Branding = () => {
   return (
@@ -38,8 +39,17 @@ const Signup = () => {
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setSignupform({ ...signupForm, [name]: value });
+  };
+
+  const handleSignup = async () => {
+    const signupAction = await signup(signupForm);
+
+    if (signupAction.status === 200) {
+      console.log("success", signupAction);
+    } else {
+      console.log("error", signupAction);
+    }
   };
 
   useEffect(() => {
@@ -419,7 +429,10 @@ const Signup = () => {
               </div>
               <div className="flex -mx-3">
                 <div className="w-full px-3 mb-5">
-                  <button className="block w-full max-w-xs mx-auto bg-custom-red hover:bg-red-700 focus:bg-red-700 text-white rounded-lg px-3 py-3 font-semibold">
+                  <button
+                    className="block w-full max-w-xs mx-auto bg-custom-red hover:bg-red-700 focus:bg-red-700 text-white rounded-lg px-3 py-3 font-semibold"
+                    onClick={handleSignup}
+                  >
                     REGISTER NOW
                   </button>
                 </div>

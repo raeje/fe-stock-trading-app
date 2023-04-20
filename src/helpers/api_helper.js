@@ -5,6 +5,32 @@ const Authorization =
   "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2ODE5NjUzNjF9.iiRI1sh78GYTlUn9uPWuPY9jYQ8nml0fVhIpTNhpEoI";
 
 // ============================================================================
+// Authentication
+// ============================================================================
+const signup = async ({
+  name,
+  role,
+  email,
+  password,
+  password_confirmation,
+}) => {
+  return await axios
+    .post(`${STOCK_URL}/signup`, {
+      name,
+      email,
+      password,
+      password_confirmation,
+      role,
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((errors) => {
+      return errors.response.data;
+    });
+};
+
+// ============================================================================
 // Portfolio
 // ============================================================================
 const getPortfolio = async () => {
@@ -111,6 +137,7 @@ const createOrder = async ({ category, price, quantity, stocks_id }) => {
     });
 };
 export {
+  signup,
   getPortfolio,
   getStocks,
   getStock,
