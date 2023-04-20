@@ -2,11 +2,11 @@ import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../stratton-oakmont-logo.svg";
 import PersonIcon from "@mui/icons-material/Person";
-import GitHubIcon from "@mui/icons-material/GitHub";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
 
 const Topbar = () => {
   return (
-    <nav className="bg-custom-cyan fixed top-0 z-30 w-full shadow-xl">
+    <nav className="bg-custom-cyan fixed top-0 z-20 w-full border-b-[1px] border-red-700 shadow-xl">
       <div className="px-3 py-3 lg:px-5 lg:pl-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-start">
@@ -69,30 +69,16 @@ const Topbar = () => {
                   data-show-count="true"
                   aria-label="Star themesberg/windster-tailwind-css-dashboard on GitHub"
                 >
-                  Star
+                  Login
                 </a>
               </div>
             </div>
             <a
-              href="/"
-              className="hidden sm:inline-flex ml-5 text-white bg-custom-red hover:bg-cyan-500 text-lg focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg px-5 py-2.5 text-center items-center mr-3"
+              href="/signup"
+              className="hidden sm:inline-flex ml-5 text-white bg-custom-red hover:bg-red-700 text-lg focus:ring-4 focus:ring-cyan-200 font-medium rounded-xl px-5 py-2.5 text-center items-center mr-3"
             >
-              <svg
-                className="svg-inline--fa fa-gem -ml-1 mr-2 h-4 w-4"
-                aria-hidden="true"
-                focusable="false"
-                data-prefix="fas"
-                data-icon="gem"
-                role="img"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 512 512"
-              >
-                <path
-                  fill="currentColor"
-                  d="M378.7 32H133.3L256 182.7L378.7 32zM512 192l-107.4-141.3L289.6 192H512zM107.4 50.67L0 192h222.4L107.4 50.67zM244.3 474.9C247.3 478.2 251.6 480 256 480s8.653-1.828 11.67-5.062L510.6 224H1.365L244.3 474.9z"
-                ></path>
-              </svg>
-              Upgrade to Pro
+              <HowToRegIcon className="mr-2" />
+              Register
             </a>
           </div>
         </div>
@@ -102,12 +88,6 @@ const Topbar = () => {
 };
 
 const Home = () => {
-  const navigate = useNavigate();
-
-  const backendBtnOnClick = () => {
-    navigate("https://github.com/raeje/stock_trading_app");
-  };
-
   const TextComponent = () => {
     return (
       <div className="h-1/2 w-5/6 flex flex-col gap-16">
@@ -116,15 +96,15 @@ const Home = () => {
         </span>
 
         <div className="h-2/3 w-2/3 text-center ">
-          <button
-            to={{
-              pathname: "/signup",
-            }}
-            className="text-white bg-custom-red hover:bg-red-700 w-full p-4 border-0 rounded-xl text-xl"
-          >
-            <PersonIcon className="h-10" />
-            <span className="ml-4 text-white ">Sign up with Email</span>
-          </button>
+          <div className="w-full flex">
+            <a
+              href="/signup"
+              className="text-white bg-custom-red hover:bg-red-700 w-full p-6 border-0 rounded-xl text-xl"
+            >
+              <PersonIcon className="h-10" />
+              <span className="ml-4 text-white ">Sign up with Email</span>
+            </a>
+          </div>
 
           <div className="flex w-full place-items-center my-4">
             <div className="h-[1px] grow bg-custom-cyan"></div>
@@ -134,24 +114,45 @@ const Home = () => {
             <div className="h-[1px] grow bg-custom-cyan"></div>
           </div>
 
-          <div className="flex w-full place-items-center my-4 gap-4">
+          <div className="flex w-full place-items-center my-4 gap-4 ">
             <a
               href="https://github.com/raeje/stock_trading_app"
-              className="bg-gray-700 hover:bg-gray-800 text-white grow p-2 rounded-lg"
+              className="bg-gray-600 hover:bg-gray-700 text-white grow p-3 rounded-xl flex place-items-center justify-center"
             >
-              <GitHubIcon />
-              <span className="text-white shrink-1 px-2 text-sm ml-2">
-                backend
-              </span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M2.25 6a3 3 0 013-3h13.5a3 3 0 013 3v12a3 3 0 01-3 3H5.25a3 3 0 01-3-3V6zm3.97.97a.75.75 0 011.06 0l2.25 2.25a.75.75 0 010 1.06l-2.25 2.25a.75.75 0 01-1.06-1.06l1.72-1.72-1.72-1.72a.75.75 0 010-1.06zm4.28 4.28a.75.75 0 000 1.5h3a.75.75 0 000-1.5h-3z"
+                  clipRule="evenodd"
+                />
+              </svg>
+
+              <span className="text-white shrink-1 px-2 text-sm">backend</span>
             </a>
+
             <a
               href="https://github.com/raeje/fe-stock-trading-app"
-              className="bg-gray-700 hover:bg-gray-800 text-white grow p-2 rounded-lg"
+              className="bg-gray-600 hover:bg-gray-700 text-white grow p-3 rounded-xl flex place-items-center justify-center"
             >
-              <GitHubIcon />
-              <span className="text-white shrink-1 px-2 text-sm ml-2">
-                fontend
-              </span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M3 6a3 3 0 013-3h12a3 3 0 013 3v12a3 3 0 01-3 3H6a3 3 0 01-3-3V6zm14.25 6a.75.75 0 01-.22.53l-2.25 2.25a.75.75 0 11-1.06-1.06L15.44 12l-1.72-1.72a.75.75 0 111.06-1.06l2.25 2.25c.141.14.22.331.22.53zm-10.28-.53a.75.75 0 000 1.06l2.25 2.25a.75.75 0 101.06-1.06L8.56 12l1.72-1.72a.75.75 0 10-1.06-1.06l-2.25 2.25z"
+                  clipRule="evenodd"
+                />
+              </svg>
+
+              <span className="text-white shrink-1 px-2 text-sm">fontend</span>
             </a>
           </div>
         </div>
@@ -160,9 +161,16 @@ const Home = () => {
   };
 
   return (
-    <div className="w-screen h-screen bg-custom-yellow flex place-items-center">
+    <div className="w-screen h-screen bg-custom-yellow flex place-items-center z-0">
       <Topbar />
-      <div className="grid grid-cols-2 grid-rows-1 place-items-center m-auto content-center w-4/5 h-3/4 shadow-lg rounded-3xl">
+      <div className="fixed -bottom-12 -right-12 z-10 h-screen flex flex-col-reverse">
+        <img
+          src={logo}
+          className="h-1/2 mr-2 rounded-xl p-[1px] drop-shadow-lg color-red-500"
+          alt="Stratton Oakmont Logo"
+        />
+      </div>
+      <div className="grid grid-cols-2 grid-rows-1 place-items-center m-auto content-center w-4/5 h-3/4 shadow-lg rounded-3xl z-20 backdrop-blur-sm">
         <TextComponent />
         <div></div>
       </div>

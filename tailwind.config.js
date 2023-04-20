@@ -46,7 +46,8 @@ module.exports = {
   plugins: [],
   safelist: [
     {
-      pattern: /(bg|text|border)-custom-(dark|light|white|gray|highlight)/,
+      pattern:
+        /(fill|bg|text|border)-custom-(dark|light|white|gray|highlight|red|cyan|yellow)/,
     },
   ],
 };
