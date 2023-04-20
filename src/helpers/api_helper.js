@@ -106,6 +106,39 @@ const getUser = async ({ id }) => {
     });
 };
 
+const getUsers = async () => {
+  return await axios
+    .get(`${STOCK_URL}/users/`, {
+      headers: { Authorization },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((errors) => {
+      return errors.response.data;
+    });
+};
+
+const updateUser = async ({ id, name, email }) => {
+  return await axios
+    .patch(
+      `${STOCK_URL}/users/update/${id}`,
+      {
+        name,
+        email,
+      },
+      {
+        headers: { Authorization },
+      }
+    )
+    .then((response) => {
+      return response.data;
+    })
+    .catch((errors) => {
+      return errors.response.data;
+    });
+};
+
 const getMyOrders = async () => {
   return await axios
     .get(`${STOCK_URL}/users/orders`, {
@@ -158,6 +191,8 @@ export {
   getStocks,
   getStock,
   getUser,
+  getUsers,
+  updateUser,
   getMyOrders,
   getMyInfo,
   createOrder,

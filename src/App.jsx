@@ -1,9 +1,6 @@
 import React from "react";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
-import Topbar from "./components/Topbar";
-import Sidebar from "./components/Sidebar";
-import ContentTemplate from "./components/ContentTemplate";
 import {
   Market,
   Portfolio,
@@ -12,13 +9,13 @@ import {
   Signup,
   Login,
 } from "./pages";
-import { CreateUser } from "./pages/admin";
-import { BrowserRouter } from "react-router-dom";
 import {
-  createBrowserRouter,
-  Navigate,
-  RouterProvider,
-} from "react-router-dom";
+  CreateUser,
+  ViewApprovedUsers,
+  ViewPendingUsers,
+  ViewTransactions,
+} from "./pages/admin";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +53,18 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/create-user",
         element: <CreateUser />,
+      },
+      {
+        path: "/dashboard/approved-users",
+        element: <ViewApprovedUsers />,
+      },
+      {
+        path: "/dashboard/pending-users",
+        element: <ViewPendingUsers />,
+      },
+      {
+        path: "/dashboard/all-transactions",
+        element: <ViewTransactions />,
       },
     ],
   },

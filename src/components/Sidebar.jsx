@@ -7,6 +7,8 @@ import {
   PointOfSale,
 } from "@mui/icons-material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 
 const Item = ({ path, name, icon }) => {
   const LINK_ACTIVE_CLASS_NAME =
@@ -45,6 +47,22 @@ const Sidebar = ({ role }) => {
                 name="Create User"
                 icon={<PersonAddIcon />}
               />
+              <Item
+                path="/dashboard/approved-users"
+                name="Approved Users"
+                icon={<PeopleAltIcon />}
+              />
+              <Item
+                path="/dashboard/pending-users"
+                name="Pending Users"
+                icon={<PeopleOutlineIcon />}
+              />
+              <Item
+                path="/dashboard/all-transactions"
+                name="All Transactions"
+                icon={<Receipt />}
+              />
+
               <Item
                 path="/dashboard/market"
                 name="Market"
