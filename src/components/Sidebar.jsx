@@ -9,6 +9,7 @@ import {
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
+import ContactsIcon from "@mui/icons-material/Contacts";
 
 const Item = ({ path, name, icon }) => {
   const LINK_ACTIVE_CLASS_NAME =
@@ -46,6 +47,11 @@ const Sidebar = ({ role }) => {
                 path="/dashboard/create-user"
                 name="Create User"
                 icon={<PersonAddIcon />}
+              />
+              <Item
+                path="/dashboard/all-users"
+                name="All Users"
+                icon={<ContactsIcon />}
               />
               <Item
                 path="/dashboard/approved-users"

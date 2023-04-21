@@ -2,8 +2,6 @@ import axios from "axios";
 import { getCurrentUser } from "./localStorage_helper";
 
 const STOCK_URL = process.env.REACT_APP_STOCK_URL;
-//const Authorization =
-//  "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2ODE5NjUzNjF9.iiRI1sh78GYTlUn9uPWuPY9jYQ8nml0fVhIpTNhpEoI";
 const Authorization = getCurrentUser()?.token;
 
 // ============================================================================
@@ -169,6 +167,19 @@ const getMyInfo = async () => {
 // ============================================================================
 // Orders
 // ============================================================================
+const getOrders = async () => {
+  return await axios
+    .get(`${STOCK_URL}/orders/`, {
+      headers: { Authorization },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((errors) => {
+      return errors.response.data;
+    });
+};
+
 const createOrder = async ({ category, price, quantity, stocks_id }) => {
   return await axios
     .post(
@@ -196,5 +207,6 @@ export {
   updateUser,
   getMyOrders,
   getMyInfo,
+  getOrders,
   createOrder,
 };

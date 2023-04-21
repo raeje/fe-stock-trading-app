@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ContentTemplate from "../../components/ContentTemplate";
 import { getUsers } from "../../helpers/api_helper";
-import ApproveUserModal from "../../components/modals/ApproveUserModal";
 import { Pie } from "../../components/charts";
 
 const ChartCard = ({ children }) => {
@@ -12,22 +11,10 @@ const ChartCard = ({ children }) => {
   );
 };
 
-const UsersTable = ({ setPendingUsers, data = [] }) => {
-  const [showModal, setShowModal] = useState(false);
-  const [modalData, setModalData] = useState(null);
-
-  const handleRowClick = (userData) => {
-    setShowModal(true);
-    setModalData(userData);
-  };
-
+const UsersTable = ({ data = [] }) => {
   const tableRow = (entry) => {
     return (
-      <tr
-        className="odd:bg-white even:bg-blue-50 cursor-pointer"
-        key={entry.id}
-        onClick={() => handleRowClick(entry)}
-      >
+      <tr className="odd:bg-white even:bg-blue-50 " key={entry.id}>
         <td className="w-1/12 text-center py-2 px-2">{entry.id}</td>
         <td className="min-w-80 text-left py-3 px-2">{entry.name}</td>
         <td className="min-w-80  text-left py-3 px-2">{entry.email}</td>
@@ -69,25 +56,18 @@ const UsersTable = ({ setPendingUsers, data = [] }) => {
           </tbody>
         </table>
       </div>
-      {showModal ? (
-        <ApproveUserModal
-          setShowModal={setShowModal}
-          data={modalData}
-          setPendingUsers={setPendingUsers}
-        />
-      ) : null}
       ;
     </div>
   );
 };
 
-const ViewPendingUsers = () => {
-  const [pendingUsers, setPendingUsers] = useState([]);
+const ViewAllUsers = () => {
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     (async () => {
       const usersData = await getUsers();
-      setPendingUsers(usersData.data.filter((user) => !user.is_approved));
+      setUsers(usersData.data);
     })();
   }, []);
 
@@ -99,30 +79,83 @@ const ViewPendingUsers = () => {
     {
       id: "ADMIN",
       label: "Admin Users",
-      value: getFilterCount(pendingUsers, "role", "admin"),
+      value: getFilterCount(users, "role", "admin"),
     },
     {
       id: "TRADER",
       label: "Trader Users",
-      value: getFilterCount(pendingUsers, "role", "trader"),
+      value: getFilterCount(users, "role", "trader"),
+    },
+  ];
+
+  const userCountBalanceLow = users.filter(
+    (user) => parseFloat(user.balance) < 1000
+  ).length;
+  const userCountBalanceMid = users.filter(
+    (user) =>
+      parseFloat(user.balance) >= 1000 && parseFloat(user.balance) < 10000
+  ).length;
+  const userCountBalanceHigh = users.filter(
+    (user) => parseFloat(user.balance) >= 10000
+  ).length;
+  const usersByBalance = [
+    {
+      id: "Low",
+      label: "Less than 1k",
+      value: userCountBalanceLow,
+    },
+    {
+      id: "Mid",
+      label: ">1k and <10k",
+      value: userCountBalanceMid,
+    },
+    {
+      id: "High",
+      label: "Greater than 10k",
+      value: userCountBalanceHigh,
+    },
+  ];
+
+  const usersByStatus = [
+    {
+      id: "APPROVED",
+      label: "Approved Users",
+      value: getFilterCount(users, "is_approved", true),
+    },
+    {
+      id: "PENDING",
+      label: "Pending Users",
+      value: getFilterCount(users, "is_approved", false),
     },
   ];
 
   return (
-    <ContentTemplate title="Pending Users">
+    <ContentTemplate title="Approved Users">
       <div className="min-h-80 w-full grid grid-cols-3 gap-8">
         <div className="bg-custom-white rounded-lg col-span-2 w-full p-8 border-2 border-gray-500">
           <div className="min-h-80 w-full flex flex-col">
-            <h2 className="text-white">Users awaiting approval.</h2>
-            <UsersTable data={pendingUsers} setPendingUsers={setPendingUsers} />
+            <h2 className="text-white">Click a user to view and/or modify.</h2>
+            <UsersTable data={users} />
           </div>
         </div>
 
         <div className="col-span-1 flex flex-col gap-8">
           <ChartCard>
             <div className="min-h-80 w-full">
-              <h2 className="text-white">Pending Users By Role</h2>
-              <Pie data={usersByRole} colorScheme="set3" />
+              <h2 className="text-white">Users By Role</h2>
+              <Pie data={usersByRole} />
+            </div>
+          </ChartCard>
+          <ChartCard>
+            <div className="min-h-80 w-full">
+              <h2 className="text-white">Users By Status</h2>
+              <Pie data={usersByStatus} colorScheme="set3" />
+            </div>
+          </ChartCard>
+          <ChartCard>
+            <div className="min-h-80 w-full">
+              <h2 className="text-white">Users By Balance</h2>
+              <Pie data={usersByBalance} colorScheme="nivo" />
             </div>
           </ChartCard>
         </div>
@@ -131,4 +164,4 @@ const ViewPendingUsers = () => {
   );
 };
 
-export default ViewPendingUsers;
+export default ViewAllUsers;

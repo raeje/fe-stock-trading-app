@@ -11,6 +11,7 @@ import {
 } from "./pages";
 import {
   CreateUser,
+  ViewAllUsers,
   ViewApprovedUsers,
   ViewPendingUsers,
   ViewTransactions,
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/create-user",
         element: <CreateUser />,
+      },
+      {
+        path: "/dashboard/all-users",
+        element: <ViewAllUsers />,
       },
       {
         path: "/dashboard/approved-users",

@@ -1,4 +1,4 @@
-import React, { Children, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { getMyOrders, getMyInfo } from "../helpers/api_helper";
 import ContentTemplate from "../components/ContentTemplate";
 import { Pie } from "../components/charts";
