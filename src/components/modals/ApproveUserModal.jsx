@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import { getUsers, updateUser } from "../helpers/api_helper";
+import { getUsers, updateUser } from "../../helpers/api_helper";
 
-const UserModal = ({ setShowModal, setApprovedUsers, data }) => {
+const ApproveUserModal = ({ setShowModal, setPendingUsers, data }) => {
   const [user, setUser] = useState({ ...data });
 
   const handleFormChange = (e) => {
@@ -15,7 +15,11 @@ const UserModal = ({ setShowModal, setApprovedUsers, data }) => {
   };
 
   const handleUpdateUser = async () => {
-    const updateAction = await updateUser({ id: data.id, ...user });
+    const updateAction = await updateUser({
+      id: data.id,
+      ...user,
+      is_approved: true,
+    });
 
     if (updateAction.status === 200) {
       console.log("success", updateAction);
@@ -24,7 +28,7 @@ const UserModal = ({ setShowModal, setApprovedUsers, data }) => {
     }
 
     const usersData = await getUsers();
-    setApprovedUsers(usersData.data.filter((user) => user.is_approved));
+    setPendingUsers(usersData.data.filter((user) => !user.is_approved));
     setShowModal(false);
   };
 
@@ -88,9 +92,10 @@ const UserModal = ({ setShowModal, setApprovedUsers, data }) => {
                         </div>
                         <input
                           type="text"
-                          className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-black outline-none focus:border-custom-cyan text-custom-red"
+                          className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-custom-cyan text-black"
                           name="name"
                           defaultValue={data.name}
+                          disabled={true}
                           onChange={handleFormChange}
                         />
                       </div>
@@ -115,10 +120,11 @@ const UserModal = ({ setShowModal, setApprovedUsers, data }) => {
                         </div>
                         <input
                           type="email"
-                          className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-black outline-none focus:border-custom-cyan text-custom-red"
+                          className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-custom-cyan text-black"
                           placeholder="v.nightcity@cyberpunk.com"
                           name="email"
                           defaultValue={data.email}
+                          disabled={true}
                           onChange={handleFormChange}
                         />
                       </div>
@@ -157,7 +163,7 @@ const UserModal = ({ setShowModal, setApprovedUsers, data }) => {
                   <div className="flex">
                     <div className="w-full px-3 mb-2">
                       <label htmlFor="" className="text-xs font-semibold px-1">
-                        Member Since
+                        Registration Date
                       </label>
                       <div className="flex">
                         <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
@@ -225,7 +231,7 @@ const UserModal = ({ setShowModal, setApprovedUsers, data }) => {
                 type="button"
                 onClick={handleUpdateUser}
               >
-                Save Changes
+                APPROVE
               </button>
             </div>
           </div>
@@ -236,4 +242,4 @@ const UserModal = ({ setShowModal, setApprovedUsers, data }) => {
   );
 };
 
-export default UserModal;
+export default ApproveUserModal;

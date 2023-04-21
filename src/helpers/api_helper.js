@@ -119,13 +119,14 @@ const getUsers = async () => {
     });
 };
 
-const updateUser = async ({ id, name, email }) => {
+const updateUser = async ({ id, name, email, is_approved }) => {
   return await axios
     .patch(
       `${STOCK_URL}/users/update/${id}`,
       {
         name,
         email,
+        is_approved,
       },
       {
         headers: { Authorization },
