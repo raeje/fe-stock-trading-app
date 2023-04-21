@@ -1,20 +1,25 @@
 import React from "react";
 
-const TitleContainer = ({ title, info }) => {
+const TitleContainer = ({ title, info, admin }) => {
   return (
-    //<div className="bg-custom-white border-yellow-500 border-2 shadow rounded-lg p-4 sm:p-6 xl:p-8  2xl:col-span-2 flex place-content-between w-full px-8">
     <div className="flex place-content-between w-full px-4">
       <span className="text-2xl sm:text-3xl leading-none font-bold text-black">
         {title}
       </span>
-      <span className="text-2xl sm:text-3xl leading-none font-bold text-black tracking-wide">
-        {info ? `Balance: $ ${info}` : ""}
-      </span>
+      {admin ? (
+        <span className="text-2xl sm:text-3xl leading-none font-bold text-black tracking-wide">
+          {info ? `Total: ${info}` : ""}
+        </span>
+      ) : (
+        <span className="text-2xl sm:text-3xl leading-none font-bold text-black tracking-wide">
+          {info ? `Balance: $ ${info}` : ""}
+        </span>
+      )}
     </div>
   );
 };
 
-const ContentTemplate = ({ title, info, children }) => {
+const ContentTemplate = ({ title, info, admin = false, children }) => {
   return (
     <div
       id="main-content"
@@ -23,7 +28,7 @@ const ContentTemplate = ({ title, info, children }) => {
       <main>
         <div className="pt-10 px-8">
           <div className="w-full grid grid-cols-1 xl:grid-cols-1 2xl:grid-cols-1 gap-8 pb-6">
-            <TitleContainer title={title} info={info} />
+            <TitleContainer title={title} info={info} admin={admin} />
             {children}
           </div>
         </div>

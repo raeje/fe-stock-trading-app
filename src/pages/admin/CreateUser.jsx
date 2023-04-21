@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ContentTemplate from "../../components/ContentTemplate";
 import { signup } from "../../helpers/api_helper";
+import { toast } from "react-toastify";
 
 const ContainerGroup1 = ({ children }) => {
   return (
@@ -28,11 +29,27 @@ const CreateUser = () => {
   const handleCreateNewUser = async () => {
     const signupAction = await signup(newUser);
 
-    if (signupAction.status === 200) {
-      console.log("success", signupAction);
+    if (signupAction.status === 201) {
+      toast.success(
+        `User ${newUser.email} successfully created. Please wait for approval.`
+      );
+      clearInputs();
     } else {
-      console.log("error", signupAction);
+      const errors = Object.keys(signupAction.errors);
+      errors.forEach((key) => {
+        const message = signupAction.errors[key][0];
+        toast.error(`${key.toUpperCase()} ${message}.`);
+      });
     }
+  };
+
+  const clearInputs = () => {
+    document.querySelector("input[name=name]").value = "";
+    document.querySelector("input[name=email]").value = "";
+    document.querySelector("input[name=password]").value = "";
+    document.querySelector("input[name=password_confirmation]").value = "";
+
+    setNewUser(initNewUserForm);
   };
 
   const handleFormChange = (e) => {

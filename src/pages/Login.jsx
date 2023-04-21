@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Branding from "../components/Branding";
 import SignupLoginSVG from "../components/SignupLoginSVG";
-import { login } from "../helpers/api_helper";
-import { setCurrentUser } from "../helpers/localStorage_helper";
+import { getStocks, login } from "../helpers/api_helper";
+import { getCurrentUser, setCurrentUser } from "../helpers/localStorage_helper";
 
 const initLoginForm = {
   email: "",
@@ -14,6 +15,14 @@ const Login = () => {
   const [loginForm, setLoginform] = useState(initLoginForm);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const currentUser = getCurrentUser();
+
+    if (currentUser) {
+      navigate("/dashboard/market");
+    }
+  }, [navigate]);
+
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setLoginform({ ...loginForm, [name]: value });
@@ -23,16 +32,13 @@ const Login = () => {
     const loginAction = await login(loginForm);
 
     if (loginAction.status === 200) {
-      console.log("success", loginAction);
+      toast.success(`Welcome back ${loginAction.data.email}!`);
       setCurrentUser(loginAction.data);
+      navigate("/dashboard/market");
     } else {
-      console.log("error", loginAction);
+      toast.error(loginAction.errors);
     }
   };
-
-  useEffect(() => {
-    console.log(loginForm);
-  }, [loginForm]);
 
   return (
     <div className="min-w-screen min-h-screen bg-custom-yellow flex items-center justify-center px-5 py-5">

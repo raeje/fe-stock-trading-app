@@ -80,8 +80,7 @@ const UsersTable = ({ setApprovedUsers, data = [] }) => {
     </div>
   );
 };
-//const [showModal, setShowModal] = useState(false);
-//{showModal ? <Modal setShowModal={setShowModal} /> : null}
+
 const ViewApprovedUsers = () => {
   const [approvedUsers, setApprovedUsers] = useState([]);
 
@@ -138,7 +137,11 @@ const ViewApprovedUsers = () => {
   ];
 
   return (
-    <ContentTemplate title="Approved Users">
+    <ContentTemplate
+      title="Approved Users"
+      admin={true}
+      info={approvedUsers?.length}
+    >
       <div className="min-h-80 w-full grid grid-cols-3 gap-8">
         <div className="bg-custom-white rounded-lg col-span-2 w-full p-8 border-2 border-gray-500">
           <div className="min-h-80 w-full flex flex-col">

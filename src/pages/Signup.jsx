@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Branding from "../components/Branding";
 import SignupLoginSVG from "../components/SignupLoginSVG";
 import { signup } from "../helpers/api_helper";
+import { getCurrentUser } from "../helpers/localStorage_helper";
+import { toast } from "react-toastify";
 
 const initSignupForm = {
   name: "",
@@ -17,6 +19,14 @@ const Signup = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const currentUser = getCurrentUser();
+
+    if (currentUser) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
+
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setSignupform({ ...signupForm, [name]: value });
@@ -25,16 +35,28 @@ const Signup = () => {
   const handleSignup = async () => {
     const signupAction = await signup(signupForm);
 
-    if (signupAction.status === 200) {
-      console.log("success", signupAction);
+    if (signupAction.status === 201) {
+      toast.success(
+        `User ${signupForm.email} successfully created. Please wait for approval.`
+      );
+      clearInputs();
     } else {
-      console.log("error", signupAction);
+      const errors = Object.keys(signupAction.errors);
+      errors.forEach((key) => {
+        const message = signupAction.errors[key][0];
+        toast.error(`${key.toUpperCase()} ${message}.`);
+      });
     }
   };
 
-  useEffect(() => {
-    console.log(signupForm);
-  }, [signupForm]);
+  const clearInputs = () => {
+    document.querySelector("input[name=name]").value = "";
+    document.querySelector("input[name=email]").value = "";
+    document.querySelector("input[name=password]").value = "";
+    document.querySelector("input[name=password_confirmation]").value = "";
+
+    setSignupform(initSignupForm);
+  };
 
   return (
     <div className="min-w-screen min-h-screen bg-custom-yellow flex items-center justify-center px-5 py-5">

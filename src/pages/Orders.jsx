@@ -8,6 +8,7 @@ import {
   getPortfolio,
 } from "../helpers/api_helper";
 import { Storefront } from "@mui/icons-material";
+import { toast } from "react-toastify";
 
 const ContainerGroup2 = ({ children }) => {
   const childrenArray = Children.toArray(children);
@@ -154,6 +155,7 @@ const Orders = () => {
       category,
       ...orderForm,
     });
+    toast.success(`${category.toUpperCase()} order created!`);
     clearInputs();
   };
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { getUsers, updateUser } from "../helpers/api_helper";
+import { toast } from "react-toastify";
 
 const UserModal = ({ setShowModal, setApprovedUsers, data }) => {
   const [user, setUser] = useState({ ...data });
@@ -18,14 +19,18 @@ const UserModal = ({ setShowModal, setApprovedUsers, data }) => {
     const updateAction = await updateUser({ id: data.id, ...user });
 
     if (updateAction.status === 200) {
-      console.log("success", updateAction);
+      toast.success(`User ${user.email} successfully updated!`);
+      setShowModal(false);
     } else {
-      console.log("error", updateAction);
+      const errors = Object.keys(updateAction.errors);
+      errors.forEach((key) => {
+        const message = updateAction.errors[key][0];
+        toast.error(`${key.toUpperCase()} ${message}.`);
+      });
     }
 
     const usersData = await getUsers();
     setApprovedUsers(usersData.data.filter((user) => user.is_approved));
-    setShowModal(false);
   };
 
   return (

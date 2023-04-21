@@ -130,7 +130,7 @@ const ViewAllUsers = () => {
   ];
 
   return (
-    <ContentTemplate title="Approved Users">
+    <ContentTemplate title="All Users" admin={true} info={users?.length}>
       <div className="min-h-80 w-full grid grid-cols-3 gap-8">
         <div className="bg-custom-white rounded-lg col-span-2 w-full p-8 border-2 border-gray-500">
           <div className="min-h-80 w-full flex flex-col">

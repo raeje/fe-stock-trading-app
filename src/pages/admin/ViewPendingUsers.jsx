@@ -109,11 +109,17 @@ const ViewPendingUsers = () => {
   ];
 
   return (
-    <ContentTemplate title="Pending Users">
+    <ContentTemplate
+      title="Pending Users"
+      admin={true}
+      info={pendingUsers?.length}
+    >
       <div className="min-h-80 w-full grid grid-cols-3 gap-8">
         <div className="bg-custom-white rounded-lg col-span-2 w-full p-8 border-2 border-gray-500">
           <div className="min-h-80 w-full flex flex-col">
-            <h2 className="text-white">Users awaiting approval.</h2>
+            <h2 className="text-white">
+              Users awaiting approval. Click a user to view and/or approve.
+            </h2>
             <UsersTable data={pendingUsers} setPendingUsers={setPendingUsers} />
           </div>
         </div>

@@ -6,5 +6,8 @@ const getCurrentUser = () => {
 const setCurrentUser = (data) => {
   localStorage.setItem("currentUser", data ? JSON.stringify(data) : null);
 };
+const removeCurrentUser = () => {
+  localStorage.removeItem("currentUser");
+};
 
-export { getCurrentUser, setCurrentUser };
+export { getCurrentUser, setCurrentUser, removeCurrentUser };

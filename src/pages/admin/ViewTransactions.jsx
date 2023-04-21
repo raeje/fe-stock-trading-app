@@ -154,7 +154,11 @@ const ViewTransactions = () => {
   ];
 
   return (
-    <ContentTemplate title="All Transactions">
+    <ContentTemplate
+      title="All Transactions"
+      admin={true}
+      info={orders?.length}
+    >
       <div className="min-h-80 w-full grid grid-cols-3 gap-8">
         <div className="bg-custom-white rounded-lg col-span-2 w-full p-8 border-2 border-gray-500">
           <div className="min-h-80 w-full flex flex-col">

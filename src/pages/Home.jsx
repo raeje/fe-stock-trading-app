@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../stratton-oakmont-logo.svg";
 import PersonIcon from "@mui/icons-material/Person";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
+import { getCurrentUser } from "../helpers/localStorage_helper";
 
 const Topbar = () => {
   return (
@@ -56,13 +57,10 @@ const Topbar = () => {
           </div>
           <div className="flex items-center">
             <div className="hidden lg:flex items-center">
-              <span className="text-base font-normal text-gray-500 mr-5">
-                Open source ❤️
-              </span>
               <div className="-mb-1">
                 <a
                   className="github-button"
-                  href="/"
+                  href="/login"
                   data-color-scheme="no-preference: dark; light: light; dark: light;"
                   data-icon="octicon-star"
                   data-size="large"
@@ -88,6 +86,16 @@ const Topbar = () => {
 };
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const currentUser = getCurrentUser();
+
+    if (currentUser) {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
+
   const TextComponent = () => {
     return (
       <div className="h-1/2 w-5/6 flex flex-col gap-16">
@@ -172,7 +180,28 @@ const Home = () => {
       </div>
       <div className="grid grid-cols-2 grid-rows-1 place-items-center m-auto content-center w-4/5 h-3/4 shadow-lg rounded-3xl z-20 backdrop-blur-sm">
         <TextComponent />
-        <div></div>
+        <div className=" h-full w-full grid grid-cols-12 grid-rows-12 gap-4">
+          <img
+            src="./buyorder.png"
+            alt="buyorder.png"
+            className="shadow-xl col-span-4 row-span-4 col-start-1 row-start-5 object-contain border-2 border-gray-500 rounded-xl"
+          />
+          <img
+            src="./traderpanel.png"
+            alt="traderpanel.png"
+            className="shadow-xl col-span-8 row-span-4 col-start-3 row-start-2 object-contain border-2 border-gray-500 rounded-xl"
+          />
+          <img
+            src="./market.png"
+            alt="market.png"
+            className="shadow-xl col-span-5 row-span-5 col-start-5 row-start-5 object-contain border-2 border-gray-500 rounded-xl"
+          />
+          <img
+            src="./adminpanel.png"
+            alt="adminpanel.png"
+            className="shadow-xl col-span-3 row-span-3 col-start-5 row-start-6 object-contain border-2 border-gray-500 rounded-xl"
+          />
+        </div>
       </div>
     </div>
   );

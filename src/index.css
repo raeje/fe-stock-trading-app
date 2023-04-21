@@ -28,6 +28,10 @@
   }
 }
 
+:root {
+  --toastify-toast-background: #29fcd2;
+}
+
 body {
   padding: 0;
   margin: 0;

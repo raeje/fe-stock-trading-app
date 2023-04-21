@@ -23,7 +23,7 @@ const signup = async ({
       role,
     })
     .then((response) => {
-      return response.data;
+      return response;
     })
     .catch((errors) => {
       return errors.response.data;
@@ -47,9 +47,11 @@ const login = async ({ email, password }) => {
 // Portfolio
 // ============================================================================
 const getPortfolio = async () => {
+  const currentUser = getCurrentUser();
+  const auth = Authorization || currentUser.token;
   return await axios
     .get(`${STOCK_URL}/users/portfolio`, {
-      headers: { Authorization },
+      headers: { Authorization: auth },
     })
     .then((response) => {
       return response.data;
@@ -63,9 +65,11 @@ const getPortfolio = async () => {
 // Stocks
 // ============================================================================
 const getStocks = async () => {
+  const currentUser = getCurrentUser();
+  const auth = Authorization || currentUser.token;
   return await axios
     .get(`${STOCK_URL}/stocks/`, {
-      headers: { Authorization },
+      headers: { Authorization: auth },
     })
     .then((response) => {
       return response.data;
@@ -76,9 +80,11 @@ const getStocks = async () => {
 };
 
 const getStock = async ({ id }) => {
+  const currentUser = getCurrentUser();
+  const auth = Authorization || currentUser.token;
   return await axios
     .get(`${STOCK_URL}/stocks/${id}}`, {
-      headers: { Authorization },
+      headers: { Authorization: auth },
     })
     .then((response) => {
       return response.data;
@@ -92,9 +98,11 @@ const getStock = async ({ id }) => {
 // Users
 // ============================================================================
 const getUser = async ({ id }) => {
+  const currentUser = getCurrentUser();
+  const auth = Authorization || currentUser.token;
   return await axios
     .get(`${STOCK_URL}/users/${id}`, {
-      headers: { Authorization },
+      headers: { Authorization: auth },
     })
     .then((response) => {
       return response.data;
@@ -105,9 +113,11 @@ const getUser = async ({ id }) => {
 };
 
 const getUsers = async () => {
+  const currentUser = getCurrentUser();
+  const auth = Authorization || currentUser.token;
   return await axios
     .get(`${STOCK_URL}/users/`, {
-      headers: { Authorization },
+      headers: { Authorization: auth },
     })
     .then((response) => {
       return response.data;
@@ -118,6 +128,8 @@ const getUsers = async () => {
 };
 
 const updateUser = async ({ id, name, email, is_approved }) => {
+  const currentUser = getCurrentUser();
+  const auth = Authorization || currentUser.token;
   return await axios
     .patch(
       `${STOCK_URL}/users/update/${id}`,
@@ -127,11 +139,12 @@ const updateUser = async ({ id, name, email, is_approved }) => {
         is_approved,
       },
       {
-        headers: { Authorization },
+        headers: { Authorization: auth },
       }
     )
     .then((response) => {
-      return response.data;
+      console.log(response);
+      return response;
     })
     .catch((errors) => {
       return errors.response.data;
@@ -139,9 +152,11 @@ const updateUser = async ({ id, name, email, is_approved }) => {
 };
 
 const getMyOrders = async () => {
+  const currentUser = getCurrentUser();
+  const auth = Authorization || currentUser.token;
   return await axios
     .get(`${STOCK_URL}/users/orders`, {
-      headers: { Authorization },
+      headers: { Authorization: auth },
     })
     .then((response) => {
       return response.data;
@@ -152,9 +167,11 @@ const getMyOrders = async () => {
 };
 
 const getMyInfo = async () => {
+  const currentUser = getCurrentUser();
+  const auth = Authorization || currentUser.token;
   return await axios
     .get(`${STOCK_URL}/users/me`, {
-      headers: { Authorization },
+      headers: { Authorization: auth },
     })
     .then((response) => {
       return response.data;
@@ -168,9 +185,11 @@ const getMyInfo = async () => {
 // Orders
 // ============================================================================
 const getOrders = async () => {
+  const currentUser = getCurrentUser();
+  const auth = Authorization || currentUser.token;
   return await axios
     .get(`${STOCK_URL}/orders/`, {
-      headers: { Authorization },
+      headers: { Authorization: auth },
     })
     .then((response) => {
       return response.data;
@@ -181,12 +200,14 @@ const getOrders = async () => {
 };
 
 const createOrder = async ({ category, price, quantity, stocks_id }) => {
+  const currentUser = getCurrentUser();
+  const auth = Authorization || currentUser.token;
   return await axios
     .post(
       `${STOCK_URL}/orders/new`,
       { category, price, quantity, stocks_id },
       {
-        headers: { Authorization },
+        headers: { Authorization: auth },
       }
     )
     .then((response) => {
