@@ -2,6 +2,15 @@ import React, { useEffect, useState } from "react";
 import ContentTemplate from "../../components/ContentTemplate";
 import { getUsers } from "../../helpers/api_helper";
 import UserModal from "../../components/UserModal";
+import { Pie } from "../../components/charts";
+
+const ChartCard = ({ children }) => {
+  return (
+    <div className="bg-custom-white shadow rounded-lg p-4 border-gray-500 border-2">
+      <div className="flex items-center justify-between mb-4">{children}</div>
+    </div>
+  );
+};
 
 const UsersTable = ({ setApprovedUsers, data = [] }) => {
   const [showModal, setShowModal] = useState(false);
@@ -78,10 +87,55 @@ const ViewApprovedUsers = () => {
 
   useEffect(() => {
     (async () => {
-      const users = await getUsers();
-      setApprovedUsers(users.data.filter((user) => user.is_approved));
+      const usersData = await getUsers();
+      setApprovedUsers(usersData.data.filter((user) => user.is_approved));
     })();
   }, []);
+
+  const getFilterCount = (array, key, value) => {
+    return array.filter((item) => item[key] === value).length;
+  };
+
+  const usersByRole = [
+    {
+      id: "ADMIN",
+      label: "Admin Users",
+      value: getFilterCount(approvedUsers, "role", "admin"),
+    },
+    {
+      id: "TRADER",
+      label: "Trader Users",
+      value: getFilterCount(approvedUsers, "role", "trader"),
+    },
+  ];
+
+  const userCountBalanceLow = approvedUsers.filter(
+    (user) => parseFloat(user.balance) < 1000
+  ).length;
+  const userCountBalanceMid = approvedUsers.filter(
+    (user) =>
+      parseFloat(user.balance) >= 1000 && parseFloat(user.balance) < 10000
+  ).length;
+  const userCountBalanceHigh = approvedUsers.filter(
+    (user) => parseFloat(user.balance) >= 10000
+  ).length;
+  const usersByBalance = [
+    {
+      id: "Low",
+      label: "Less than 1k",
+      value: userCountBalanceLow,
+    },
+    {
+      id: "Mid",
+      label: ">1k and <10k",
+      value: userCountBalanceMid,
+    },
+    {
+      id: "High",
+      label: "Greater than 10k",
+      value: userCountBalanceHigh,
+    },
+  ];
 
   return (
     <ContentTemplate title="Approved Users">
@@ -96,7 +150,20 @@ const ViewApprovedUsers = () => {
           </div>
         </div>
 
-        <div className="col-span-1 flex flex-col gap-8"></div>
+        <div className="col-span-1 flex flex-col gap-8">
+          <ChartCard>
+            <div className="min-h-80 w-full">
+              <h2 className="text-white">Approved Users By Role</h2>
+              <Pie data={usersByRole} />
+            </div>
+          </ChartCard>
+          <ChartCard>
+            <div className="min-h-80 w-full">
+              <h2 className="text-white">Approved Users By Balance</h2>
+              <Pie data={usersByBalance} colorScheme="nivo" />
+            </div>
+          </ChartCard>
+        </div>
       </div>
     </ContentTemplate>
   );
