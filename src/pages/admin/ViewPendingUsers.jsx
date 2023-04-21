@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ContentTemplate from "../../components/ContentTemplate";
 import { getUsers } from "../../helpers/api_helper";
-import UserModal from "../../components/UserModal";
 import ApproveUserModal from "../../components/modals/ApproveUserModal";
 import { Pie } from "../../components/charts";
 
@@ -91,6 +90,24 @@ const ViewPendingUsers = () => {
       setPendingUsers(usersData.data.filter((user) => !user.is_approved));
     })();
   }, []);
+
+  const getFilterCount = (array, key, value) => {
+    return array.filter((item) => item[key] === value).length;
+  };
+
+  const usersByRole = [
+    {
+      id: "ADMIN",
+      label: "Admin Users",
+      value: getFilterCount(pendingUsers, "role", "admin"),
+    },
+    {
+      id: "TRADER",
+      label: "Trader Users",
+      value: getFilterCount(pendingUsers, "role", "trader"),
+    },
+  ];
+
   return (
     <ContentTemplate title="Pending Users">
       <div className="min-h-80 w-full grid grid-cols-3 gap-8">
@@ -101,7 +118,14 @@ const ViewPendingUsers = () => {
           </div>
         </div>
 
-        <div className="col-span-1 flex flex-col gap-8"></div>
+        <div className="col-span-1 flex flex-col gap-8">
+          <ChartCard>
+            <div className="min-h-80 w-full">
+              <h2 className="text-white">Approved Users By Role</h2>
+              <Pie data={usersByRole} colorScheme="set3" />
+            </div>
+          </ChartCard>
+        </div>
       </div>
     </ContentTemplate>
   );
