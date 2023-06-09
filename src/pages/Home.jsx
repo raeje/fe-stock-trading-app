@@ -160,7 +160,7 @@ const Home = () => {
                 />
               </svg>
 
-              <span className="text-white shrink-1 px-2 text-sm">fontend</span>
+              <span className="text-white shrink-1 px-2 text-sm">frontend</span>
             </a>
           </div>
         </div>
@@ -199,7 +199,7 @@ const Home = () => {
           <img
             src="./adminpanel.png"
             alt="adminpanel.png"
-            className="shadow-xl col-span-3 row-span-3 col-start-5 row-start-6 object-contain border-2 border-gray-500 rounded-xl"
+            className="shadow-xl col-span-3 row-span-3 col-start-6 row-start-6 object-contain border-2 border-gray-500 rounded-xl"
           />
         </div>
       </div>
